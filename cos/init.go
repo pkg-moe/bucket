@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/tencentyun/cos-go-sdk-v5"
+
 	"pkg.moe/pkg/bucket/dao"
 )
 
