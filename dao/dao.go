@@ -3,10 +3,12 @@ package bucketdao
 type Config struct {
 	DomainCDN string
 
-	Endpoint string
-	Bucket   string
-	AK       string
-	SK       string
+	Endpoint    string
+	Bucket      string
+	AK          string
+	SK          string
+	Region      string
+	PartitionID string
 }
 
 type ObjectInfo struct {
