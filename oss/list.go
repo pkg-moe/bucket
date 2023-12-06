@@ -25,6 +25,7 @@ func (o *OSS) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 			res = append(res, bucketdao.ObjectInfo{
 				Key:          object.Key,
 				LastModified: object.LastModified.Unix(),
+				Size:         object.Size,
 			})
 		}
 

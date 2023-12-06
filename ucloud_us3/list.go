@@ -2,6 +2,7 @@ package ucloud_us3
 
 import (
 	"sort"
+	"strconv"
 
 	ufsdk "github.com/ufilesdk-dev/ufile-gosdk"
 
@@ -25,9 +26,11 @@ func (o *UCloudUS3) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 		}
 
 		for _, item := range list.Contents {
+			size, _ := strconv.ParseInt(item.Size, 10, 64)
 			res = append(res, bucketdao.ObjectInfo{
 				Key:          item.Key,
 				LastModified: int64(item.LastModified),
+				Size:         size,
 			})
 		}
 

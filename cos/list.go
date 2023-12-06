@@ -34,6 +34,7 @@ func (o *COS) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 			res = append(res, bucketdao.ObjectInfo{
 				Key:          item.Key,
 				LastModified: t.Unix(),
+				Size:         item.Size,
 			})
 		}
 

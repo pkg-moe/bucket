@@ -30,6 +30,7 @@ func (o *S3) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 			res = append(res, bucketdao.ObjectInfo{
 				Key:          *item.Key,
 				LastModified: item.LastModified.Unix(),
+				Size:         *item.Size,
 			})
 		}
 

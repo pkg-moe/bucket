@@ -14,6 +14,7 @@ type Config struct {
 type ObjectInfo struct {
 	Key          string
 	LastModified int64
+	Size         int64
 }
 
 type IBucket interface {
