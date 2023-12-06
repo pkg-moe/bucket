@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"context"
 	"io"
-
-	bucketdao "pkg.moe/pkg/bucket/dao"
 )
 
 func (c *COS) Get(name string) ([]byte, error) {
@@ -22,8 +20,4 @@ func (c *COS) Get(name string) ([]byte, error) {
 func (c *COS) Put(name string, value []byte) error {
 	_, err := c.client.Object.Put(context.Background(), name, bytes.NewReader(value), nil)
 	return err
-}
-
-func (c *COS) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
-	return nil, nil
 }

@@ -17,16 +17,25 @@ func (o *UCloudUS3) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 		return nil, err
 	}
 
-	list, err := req.ListObjects(path, "", "/", 1000)
-	if err != nil {
-		return nil, err
-	}
+	continueToken := ""
+	for {
+		list, err := req.ListObjects(path, continueToken, "/", 1000)
+		if err != nil {
+			return nil, err
+		}
 
-	for _, item := range list.Contents {
-		res = append(res, bucketdao.ObjectInfo{
-			Key:          item.Key,
-			LastModified: int64(item.LastModified),
-		})
+		for _, item := range list.Contents {
+			res = append(res, bucketdao.ObjectInfo{
+				Key:          item.Key,
+				LastModified: int64(item.LastModified),
+			})
+		}
+
+		if list.IsTruncated {
+			continueToken = list.NextMarker
+		} else {
+			break
+		}
 	}
 
 	sort.Slice(res, func(i, j int) bool {
