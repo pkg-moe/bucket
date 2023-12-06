@@ -34,4 +34,7 @@ type IBucket interface {
 
 	//List
 	ListObjectsV2(path string) ([]ObjectInfo, error)
+
+	// delete
+	DeleteObjects(keys []string) error
 }
