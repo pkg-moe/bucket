@@ -3,7 +3,6 @@ package ucloud_us3
 import (
 	"bytes"
 	"io"
-	"time"
 
 	ufsdk "github.com/ufilesdk-dev/ufile-gosdk"
 )
@@ -14,10 +13,8 @@ func (o *UCloudUS3) Get(name string) ([]byte, error) {
 		return nil, err
 	}
 
-	reqUrl := req.GetPrivateURL(name, 10*time.Minute)
-
 	buf := bytes.NewBuffer(nil)
-	if err := req.DownloadFile(buf, reqUrl); err != nil {
+	if err := req.DownloadFile(buf, name); err != nil {
 		return nil, err
 	}
 
