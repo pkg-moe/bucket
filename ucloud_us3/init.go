@@ -20,7 +20,7 @@ func (o *UCloudUS3) Init(config *bucketdao.Config) (err error) {
 		PrivateKey:      config.SK,
 		BucketName:      config.Bucket,
 		FileHost:        config.Endpoint,
-		Endpoint:        config.DomainCDN,
+		Endpoint:        config.Endpoint,
 		VerifyUploadMD5: true,
 	}
 	return

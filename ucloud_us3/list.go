@@ -3,7 +3,6 @@ package ucloud_us3
 import (
 	"sort"
 	"strconv"
-	"strings"
 
 	ufsdk "github.com/ufilesdk-dev/ufile-gosdk"
 
@@ -19,16 +18,17 @@ func (o *UCloudUS3) ListObjectsV2(path string) ([]bucketdao.ObjectInfo, error) {
 		return nil, err
 	}
 
-	delimiter := "/"
-	if strings.HasSuffix(path, "/") {
-		delimiter = ""
-	}
-
 	continueToken := ""
 	for {
-		list, err := req.ListObjects(path, continueToken, delimiter, 1000)
+		list, err := req.ListObjects(path, continueToken, "/", 1000)
 		if err != nil {
 			return nil, err
+		}
+
+		for _, item := range list.CommonPrefixes {
+			res = append(res, bucketdao.ObjectInfo{
+				Key: item.Prefix,
+			})
 		}
 
 		for _, item := range list.Contents {
