@@ -25,12 +25,11 @@ func (o *S3) Init(c *bucketdao.Config) (err error) {
 		return aws.Endpoint{
 			PartitionID:   c.PartitionID,
 			URL:           c.Endpoint,
-			SigningRegion: c.Region,
 		}, nil
 	})
 
 	creds := credentials.NewStaticCredentialsProvider(c.AK, c.SK, "")
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithCredentialsProvider(creds), config.WithEndpointResolverWithOptions(customResolver))
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithCredentialsProvider(creds), config.WithEndpointResolverWithOptions(customResolver), config.WithRegion(c.Region))
 	if err != nil {
 		return err
 	}
